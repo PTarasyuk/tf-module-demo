@@ -12,7 +12,7 @@
 
 ```hcl
 terraform {
-  required_version = ">= 1.0"
+  required_version = "1.7.0"
 }
 
 module "tf-module-demo" {
@@ -26,7 +26,7 @@ module "tf-module-demo" {
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | 1.7.0 |
 | <a name="requirement_null"></a> [null](#requirement\_null) | 3.2.0 |
 
 ## Providers
