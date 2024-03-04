@@ -1,0 +1,15 @@
+# https://terraform-docs.io/
+content: |-
+  ## Usage
+
+  ```hcl
+  {{ include "examples/main.tf" }}
+  ```
+
+  {{ .Requirements }}
+
+  {{ .Providers }}
+
+  {{ .Inputs }}
+
+  {{ .Outputs }}

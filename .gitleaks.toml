@@ -1,0 +1,50 @@
+[whitelist]
+  description = "Whitelist file extensions and paths"
+  files = [
+    "(?i)\\.md$",
+    "(?i)\\.txt$"
+  ]
+  paths = [
+    "^docs/",
+    "^tests/"
+  ]
+
+[[rules]]
+  description = "AWS Access Key"
+  regex = '''AKIA[0-9A-Z]{16}'''
+  tags = ["key", "AWS"]
+
+[[rules]]
+  description = "AWS Secret Key"
+  regex = '''(?i)aws(.{0,20})?['\"][0-9a-zA-Z\/+]{40}['\"]'''
+  tags = ["key", "AWS"]
+
+[[rules]]
+  description = "RSA private key"
+  regex = '''-----BEGIN RSA PRIVATE KEY-----'''
+  tags = ["key", "RSA"]
+
+[[rules]]
+  description = "SSH (OPENSSH) private key"
+  regex = '''-----BEGIN OPENSSH PRIVATE KEY-----'''
+  tags = ["key", "SSH"]
+
+[[rules]]
+  description = "GitHub"
+  regex = '''ghp_[0-9a-zA-Z]{36}'''
+  tags = ["key", "GitHub"]
+
+[[rules]]
+  description = "Generic API Key"
+  regex = '''(?i)api_key['"]?[:=][^,]+'''
+  tags = ["key", "API"]
+
+[[rules]]
+  description = "Generic Secret"
+  regex = '''(?i)secret['"]?[:=][^,]+'''
+  tags = ["secret"]
+
+[[rules]]
+  description = "Generic Password"
+  regex = '''(?i)password['"]?[:=][^,]+'''
+  tags = ["password"]

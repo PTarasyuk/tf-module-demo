@@ -1,0 +1,55 @@
+name: Pre-commit
+
+on:
+  push:
+    branches: ['main', 'master']
+  pull_request:
+    types: [opened, reopened, synchronize]
+    branches: ['main', 'master']
+  release:
+    types: [published]
+
+jobs:
+  pre-commit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Python 3.9.6
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9.6'
+
+      - name: Install pre-commit
+        run: pip install pre-commit
+
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.7.0
+
+      - name: Install Terraform Docs
+        run: |
+          wget https://github.com/terraform-docs/terraform-docs/releases/download/v0.16.0/terraform-docs-v0.17.0-linux-amd64.tar.gz
+          tar -xzf terraform-docs-v0.17.0-linux-amd64.tar.gz
+          sudo mv terraform-docs /usr/local/bin
+
+      - name: Install TFLint
+        run: |
+          curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash
+
+      - name: Install Trivy
+        run: |
+          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin
+
+      - name: Cache pre-commit plugins
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pre-commit
+          key: ${{ runner.os }}-pre-commit-${{ hashFiles('.pre-commit-config.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pre-commit-
+
+      - name: Run pre-commit
+        run: pre-commit run --all-files
