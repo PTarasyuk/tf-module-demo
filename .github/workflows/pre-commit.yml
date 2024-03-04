@@ -15,9 +15,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - uses: clowdhaus/terraform-composite-actions/pre-commit@main
         with:
-          # Configure default software
           terraform-version: 1.7.0
           terraform-docs-version: v0.17.0
+          tflint-version: v0.50.3
           args: "--all-files --color always --show-diff-on-failure"
