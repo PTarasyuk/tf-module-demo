@@ -1,4 +1,4 @@
-# Demo Terraform module
+# Terraform module demo
 
 #### Table of Contents
 
